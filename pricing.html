@@ -1,0 +1,2041 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тарифы - MGC Group</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="responsive.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+    <style>
+        /* НОВЫЕ СТИЛИ ДЛЯ УЛУЧШЕННОЙ СТРАНИЦЫ ТАРИФОВ */
+        
+        /* Hero секция с анимацией */
+        .pricing-hero {
+            position: relative;
+            padding: 120px 0 80px;
+            background: linear-gradient(135deg, var(--color-beige) 0%, #F5F0E6 100%);
+            overflow: hidden;
+        }
+        
+        .hero-decoration {
+            position: absolute;
+            z-index: 1;
+        }
+        
+        .decoration-1 {
+            top: 10%;
+            left: 5%;
+            animation: float 8s ease-in-out infinite;
+        }
+        
+        .decoration-2 {
+            bottom: 20%;
+            right: 8%;
+            animation: float 10s ease-in-out infinite reverse;
+        }
+        
+        /* Сетка тарифов с улучшенным дизайном */
+        .pricing-comparison {
+            position: relative;
+            margin: 100px 0;
+            background: var(--color-white);
+            border-radius: 30px;
+            padding: 60px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.08);
+        }
+        
+        .comparison-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 60px;
+            padding-bottom: 30px;
+            border-bottom: 3px solid var(--color-beige);
+        }
+        
+        .period-toggle {
+            display: flex;
+            background: var(--color-beige);
+            padding: 8px;
+            border-radius: 16px;
+        }
+        
+        .period-btn {
+            padding: 14px 32px;
+            border: none;
+            background: transparent;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        
+        .period-btn.active {
+            background: var(--color-green);
+            color: var(--color-black);
+            box-shadow: 0 4px 12px rgba(182, 255, 46, 0.3);
+        }
+        
+        .period-btn .discount {
+            display: inline-block;
+            background: #111;
+            color: #fff;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            margin-left: 8px;
+        }
+        
+        /* Улучшенные карточки тарифов */
+        .pricing-cards-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 80px;
+        }
+        
+        .pricing-card-v2 {
+            background: var(--color-white);
+            border-radius: 24px;
+            border: 2px solid #E5E5E5;
+            padding: 0;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            height: 100%;
+        }
+        
+        .pricing-card-v2:hover {
+            transform: translateY(-15px);
+            border-color: var(--color-green);
+            box-shadow: 0 25px 50px rgba(182, 255, 46, 0.15);
+        }
+        
+        .pricing-card-v2.popular {
+            border-color: var(--color-green);
+            transform: scale(1.02);
+        }
+        
+        .pricing-card-v2.popular:hover {
+            transform: scale(1.02) translateY(-15px);
+        }
+        
+        .popular-badge {
+            position: absolute;
+            top: 20px;
+            right: -30px;
+            background: var(--color-green);
+            color: var(--color-black);
+            padding: 8px 40px;
+            font-weight: 800;
+            transform: rotate(45deg);
+            font-size: 0.9rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .pricing-card-header {
+            padding: 40px 40px 30px;
+            background: linear-gradient(135deg, #f8f8f8 0%, #ffffff 100%);
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .pricing-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(182, 255, 46, 0.1);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .pricing-price-block {
+            margin: 30px 0;
+        }
+        
+        .pricing-price {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: var(--color-black);
+            line-height: 1;
+            margin-bottom: 5px;
+        }
+        
+        .pricing-old-price {
+            font-size: 1.5rem;
+            color: #999;
+            text-decoration: line-through;
+            margin-bottom: 5px;
+            display: none;
+        }
+        
+        .pricing-period {
+            color: var(--color-gray);
+            font-size: 1rem;
+        }
+        
+        .pricing-savings {
+            color: var(--color-green);
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            display: none;
+        }
+        
+        .pricing-features-list {
+            padding: 30px 40px;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px dashed #f0f0f0;
+        }
+        
+        .feature-item:last-child {
+            border-bottom: none;
+        }
+        
+        .feature-icon {
+            width: 24px;
+            height: 24px;
+            background: rgba(182, 255, 46, 0.1);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .feature-text {
+            flex: 1;
+        }
+        
+        .feature-note {
+            font-size: 0.85rem;
+            color: var(--color-gray);
+            margin-top: 5px;
+            font-style: italic;
+        }
+        
+        .pricing-card-footer {
+            padding: 30px 40px;
+            background: #fafafa;
+            border-top: 1px solid #f0f0f0;
+        }
+        
+        /* Детализированная таблица сравнения */
+        .detailed-comparison {
+            margin: 100px 0;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--color-white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+        }
+        
+        .comparison-table th {
+            background: var(--color-beige);
+            padding: 25px 20px;
+            text-align: center;
+            font-weight: 700;
+            border-bottom: 2px solid #E5E5E5;
+        }
+        
+        .comparison-table td {
+            padding: 20px;
+            border-bottom: 1px solid #f0f0f0;
+            text-align: center;
+        }
+        
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .comparison-table .category {
+            background: #fafafa;
+            font-weight: 600;
+            text-align: left;
+        }
+        
+        .comparison-table .included {
+            color: var(--color-green);
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+        
+        .comparison-table .limited {
+            color: #FFA500;
+            font-weight: 600;
+        }
+        
+        .comparison-table .not-included {
+            color: var(--color-gray);
+            opacity: 0.5;
+        }
+        
+        /* Визуализация ROI */
+        .roi-visualization {
+            background: linear-gradient(135deg, #111111 0%, #333333 100%);
+            color: white;
+            border-radius: 30px;
+            padding: 80px 60px;
+            margin: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .roi-content {
+            position: relative;
+            z-index: 2;
+            max-width: 600px;
+        }
+        
+        .roi-content .section-title,
+        .roi-content .section-subtitle {
+            color: white;
+        }
+        
+        .roi-stats {
+            display: flex;
+            gap: 60px;
+            margin-top: 50px;
+        }
+        
+        .roi-stat {
+            text-align: center;
+        }
+        
+        .roi-stat-value {
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--color-green);
+            display: block;
+            line-height: 1;
+        }
+        
+        .roi-stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-top: 10px;
+        }
+        
+        .roi-visual {
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0.3;
+        }
+        
+        /* Дополнительные услуги */
+        .addon-services {
+            margin: 100px 0;
+        }
+        
+        .addon-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .addon-card {
+            background: var(--color-white);
+            border-radius: 20px;
+            padding: 40px;
+            border: 2px solid #E5E5E5;
+            transition: all 0.3s ease;
+        }
+        
+        .addon-card:hover {
+            border-color: var(--color-green);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(182, 255, 46, 0.1);
+        }
+        
+        .addon-price {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--color-black);
+            margin: 20px 0;
+        }
+        
+        /* FAQ с категориями */
+        .faq-categories {
+            margin: 100px 0;
+        }
+        
+        .category-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .category-tab {
+            padding: 15px 30px;
+            background: var(--color-beige);
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .category-tab.active {
+            background: var(--color-green);
+            color: var(--color-black);
+        }
+        
+        .faq-category {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .faq-category.active {
+            display: block;
+        }
+        
+        .faq-accordion {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            border: 1px solid #E5E5E5;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .faq-item.active {
+            border-color: var(--color-green);
+            box-shadow: 0 5px 15px rgba(182, 255, 46, 0.1);
+        }
+        
+        .faq-question {
+            width: 100%;
+            padding: 20px 25px;
+            background: none;
+            border: none;
+            text-align: left;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        .faq-question:hover {
+            background: rgba(182, 255, 46, 0.05);
+        }
+        
+        .faq-question svg {
+            transition: transform 0.3s ease;
+            transform: rotate(0deg);
+        }
+        
+        .faq-item.active .faq-question svg {
+            transform: rotate(180deg);
+        }
+        
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            padding: 0 25px;
+        }
+        
+        .faq-item.active .faq-answer {
+            max-height: 1000px;
+            padding: 0 25px 25px;
+        }
+        
+        .faq-answer p,
+        .faq-answer ul,
+        .faq-answer ol {
+            margin: 10px 0;
+        }
+        
+        .faq-answer ul,
+        .faq-answer ol {
+            padding-left: 20px;
+        }
+        
+        .faq-answer li {
+            margin: 5px 0;
+        }
+        
+        /* Плавающая кнопка консультации */
+        .floating-consult {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+            background: var(--color-green);
+            color: var(--color-black);
+            border-radius: 50px;
+            padding: 18px 30px;
+            font-weight: 700;
+            text-decoration: none;
+            box-shadow: 0 10px 30px rgba(182, 255, 46, 0.4);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            transform: translateY(0);
+            animation: pulse 2s infinite;
+        }
+        
+        .floating-consult:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(182, 255, 46, 0.6);
+        }
+        
+        /* Анимации */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(182, 255, 46, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(182, 255, 46, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(182, 255, 46, 0); }
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 1100px) {
+            .pricing-cards-container {
+                grid-template-columns: 1fr;
+                max-width: 500px;
+                margin: 0 auto 80px;
+            }
+            
+            .pricing-card-v2.popular {
+                transform: none;
+            }
+            
+            .pricing-card-v2.popular:hover {
+                transform: translateY(-15px);
+            }
+            
+            .comparison-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .pricing-comparison {
+                padding: 30px;
+            }
+            
+            .comparison-header {
+                flex-direction: column;
+                gap: 30px;
+                text-align: center;
+            }
+            
+            .period-toggle {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .roi-visualization {
+                padding: 50px 30px;
+            }
+            
+            .roi-stats {
+                flex-direction: column;
+                gap: 30px;
+            }
+            
+            .floating-consult {
+                bottom: 20px;
+                right: 20px;
+                padding: 15px 25px;
+                font-size: 0.9rem;
+            }
+            
+            .category-tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .category-tab {
+                width: 100%;
+                max-width: 300px;
+                text-align: center;
+            }
+        }
+        
+        /* Специфичные стили для страницы тарифов */
+        .pricing-extra-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin: 80px 0;
+        }
+        
+        .info-card {
+            background: var(--color-white);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+        
+        .info-card h3 {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .info-card h3 .icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(182, 255, 46, 0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Плавающая кнопка -->
+    <a href="#consultation" class="floating-consult">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
+        </svg>
+        Бесплатная консультация
+    </a>
+
+    <!-- Навигация -->
+    <header class="header">
+        <div class="container">
+            <div class="header-inner">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">
+                        <svg width="40" height="40" viewBox="0 0 40 40">
+                            <circle cx="20" cy="20" r="18" stroke="#B6FF2E" stroke-width="3" fill="none"/>
+                            <polygon points="20,8 26,18 32,18 26,24 28,32 20,26 12,32 14,24 8,18 14,18" fill="#B6FF2E"/>
+                        </svg>
+                    </div>
+                    <div class="logo-text">
+                        <span class="logo-title">MGC Group</span>
+                        <span class="logo-subtitle">Most Grateful Company</span>
+                    </div>
+                </a>
+                
+                <nav class="main-nav">
+                    <button class="mobile-menu-btn" aria-label="Открыть меню">
+                        <span></span><span></span><span></span>
+                    </button>
+                    <ul class="nav-list">
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="pricing.html" class="active">Тарифы</a></li>
+                        <li><a href="team.html">Эксперты и отзывы</a></li>
+                        <li><a href="contact.html">Помощь</a></li>
+                    </ul>
+                </nav>
+                
+                <a href="#consultation" class="btn btn-primary btn-small">Бесплатный аудит</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero-секция -->
+    <section class="pricing-hero">
+        <div class="container">
+            <!-- Декоративные элементы -->
+            <div class="hero-decoration decoration-1">
+                <svg width="120" height="120" viewBox="0 0 120 120">
+                    <path d="M60,20 C80.986,20 98,37.014 98,58 C98,78.986 80.986,96 60,96 C39.014,96 22,78.986 22,58 C22,37.014 39.014,20 60,20 Z" fill="#B6FF2E" fill-opacity="0.1"/>
+                    <path d="M40,40 L80,40 L80,80 L40,80 Z" fill="#B6FF2E" fill-opacity="0.3"/>
+                </svg>
+            </div>
+            
+            <div class="hero-decoration decoration-2">
+                <svg width="80" height="80" viewBox="0 0 80 80">
+                    <circle cx="40" cy="40" r="35" fill="#B6FF2E" fill-opacity="0.05"/>
+                    <polygon points="40,15 52,30 65,30 55,45 60,60 40,50 20,60 25,45 15,30 28,30" fill="#B6FF2E" fill-opacity="0.2"/>
+                </svg>
+            </div>
+            
+            <div class="hero-content" style="position: relative; z-index: 2;">
+                <h1 class="hero-title">Инвестируйте в рост,<br>а не в траты</h1>
+                <p class="hero-subtitle">Тарифы, которые окупаются с первой недели. Выбирайте не пакет услуг, а результат для бизнеса.</p>
+                
+                <div class="hero-buttons">
+                    <a href="#dcomparison" class="btn btn-primary btn-large">Сравнить тарифы</a>
+                    <a href="#roi" class="btn btn-secondary btn-large">Калькулятор ROI</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Переключатель периодов и основное сравнение -->
+    <section class="pricing-comparison" id="comparison">
+        <div class="container">
+            <div class="comparison-header">
+                <div>
+                    <h2>Тарифы, которые работают на результат</h2>
+                    <p>Выберите период оплаты и сравните возможности</p>
+                </div>
+                
+                <div class="period-toggle">
+                    <button class="period-btn active" data-period="monthly">
+                        Ежемесячно
+                    </button>
+                    <button class="period-btn" data-period="quarterly">
+                        Квартально <span class="discount">-15%</span>
+                    </button>
+                    <button class="period-btn" data-period="yearly">
+                        Годовой <span class="discount">-30%</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="pricing-cards-container">
+                <!-- Тариф Start -->
+                <div class="pricing-card-v2">
+                    <div class="pricing-card-header">
+                        <div class="pricing-icon">
+                            <svg width="32" height="32" viewBox="0 0 32 32">
+                                <path d="M16,6 C22.627,6 28,11.373 28,18 C28,24.627 22.627,30 16,30 C9.373,30 4,24.627 4,18 C4,11.373 9.373,6 16,6 Z" fill="#B6FF2E" fill-opacity="0.3"/>
+                                <path d="M12,14 L20,14 L20,22 L12,22 Z" fill="#B6FF2E"/>
+                            </svg>
+                        </div>
+                        <h3>Start</h3>
+                        <p>Для тестирования гипотез и стартапов</p>
+                        
+                        <div class="pricing-price-block">
+                            <div class="pricing-price" data-monthly="45000" data-quarterly="38250" data-yearly="31500">45 000 ₽</div>
+                            <div class="pricing-old-price"></div>
+                            <div class="pricing-period">/месяц</div>
+                            <div class="pricing-savings">Экономия 6 750₽ в месяц</div>
+                        </div>
+                        
+                        <a href="#consultation" class="btn btn-secondary btn-large">Начать с этого</a>
+                    </div>
+                    
+                    <div class="pricing-features-list">
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="#B6FF2E">
+                                    <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                                </svg>
+                            </div>
+                            <div class="feature-text">
+                                <strong>12 постов в месяц</strong>
+                                <div class="feature-note">3 поста в неделю</div>
+                            </div>
+                        </div>
+                        
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="#B6FF2E">
+                                    <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                                </svg>
+                            </div>
+                            <div class="feature-text">
+                                <strong>8 сторис в месяц</strong>
+                                <div class="feature-note">2 в неделю</div>
+                            </div>
+                        </div>
+                        
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="#B6FF2E">
+                                    <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                                </svg>
+                            </div>
+                            <div class="feature-text">
+                                <strong>1 рекламная кампания</strong>
+                                <div class="feature-note">Бюджет от 20 000₽</div>
+                            </div>
+                        </div>
+                        
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="#B6FF2E">
+                                    <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                                </svg>
+                            </div>
+                            <div class="feature-text">
+                                <strong>Базовый контент-план</strong>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="pricing-card-footer">
+                        <p><strong>Идеально для:</strong> стартапов, локального бизнеса, тестирования ниши</p>
+                        <p><strong>Ожидаемый ROI:</strong> 2-3x за 3 месяца</p>
+                    </div>
+                </div>
+                
+                <!-- Тариф Growth (популярный) -->
+                <div class="pricing-card-v2 popular">
+                    <div class="popular-badge">ПОПУЛЯРНЫЙ</div>
+                    <div class="pricing-card-header">
+                        <div class="pricing-icon">
+                            <svg width="32" height="32" viewBox="0 0 32 32">
+                                <path d="M16,4 C23.732,4 30,10.268 30,18 C30,25.732 23.732,32 16,32 C8.268,32 2,25.732 2,18 C2,10.268 8.268,4 16,4 Z" fill="#B6FF2E" fill-opacity="0.3"/>
+                                <path d="M10,12 L22,12 L22,24 L10,24 Z" fill="#B6FF2E"/>
+                                <path d="M14,16 L18,16 L18,20 L14,20 Z" fill="#111111"/>
+                            </svg>
+                        </div>
+                        <h3>Growth</h3>
+                        <p>Для стабильного роста и масштабирования</p>
+                        
+                        <div class="pricing-price-block">
+                            <div class="pricing-price" data-monthly="89000" data-quarterly="75650" data-yearly="62300">89 000 ₽</div>
+                            <div class="pricing-old-price"></div>
+                            <div class="pricing-period">/месяц</div>
+                            <div class="pricing-savings">Экономия 13 350₽ в месяц</div>
+                        </div>
+                        
+                        <a href="#consultation" class="btn btn-primary btn-large">Выбрать тариф</a>
+                    </div>
+                    
+                    <div class="pricing-features-list">
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="#B6FF2E">
+                                    <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                                </svg>
+                            </div>
+                            <div class="feature-text">
+                                <strong>24 поста в месяц</strong>
+                                <div class="feature-note">6 постов в неделю</div>
+                            </div>
+                        </div>
+                        
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="#B6FF2E">
+                                    <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                                </svg>
+                            </div>
+                            <div class="feature-text">
+                                <strong>20 сторис + 4 Reels</strong>
+                                <div class="feature-note">Еженедельный видеоконтент</div>
+                            </div>
+                        </div>
+                        
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="#B6FF2E">
+                                    <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                                </svg>
+                            </div>
+                            <div class="feature-text">
+                                <strong>3 рекламные кампании</strong>
+                                <div class="feature-note">Сквозная аналитика</div>
+                            </div>
+                        </div>
+                        
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="#B6FF2E">
+                                    <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                                </svg>
+                            </div>
+                            <div class="feature-text">
+                                <strong>Персональный дашборд</strong>
+                                <div class="feature-note">KPI в реальном времени</div>
+                            </div>
+                        </div>
+                        
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="#B6FF2E">
+                                    <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                                </svg>
+                            </div>
+                            <div class="feature-text">
+                                <strong>Еженедельные стратегические созвоны</strong>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="pricing-card-footer">
+                        <p><strong>Идеально для:</strong> растущего бизнеса, среднего чека от 5 000₽</p>
+                        <p><strong>Ожидаемый ROI:</strong> 3-5x за 3 месяца</p>
+                    </div>
+                </div>
+                
+                <!-- Тариф Pro -->
+                <div class="pricing-card-v2">
+                    <div class="pricing-card-header">
+                        <div class="pricing-icon">
+                            <svg width="32" height="32" viewBox="0 0 32 32">
+                                <path d="M16,2 C24.837,2 32,9.163 32,18 C32,26.837 24.837,34 16,34 C7.163,34 0,26.837 0,18 C0,9.163 7.163,2 16,2 Z" fill="#B6FF2E" fill-opacity="0.3"/>
+                                <path d="M8,10 L24,10 L24,26 L8,26 Z" fill="#B6FF2E"/>
+                                <path d="M12,14 L20,14 L20,22 L12,22 Z" fill="#111111"/>
+                                <path d="M16,18 L16,18" stroke="#B6FF2E" stroke-width="4"/>
+                            </svg>
+                        </div>
+                        <h3>Pro</h3>
+                        <p>Для лидеров рынка и агрессивного роста</p>
+                        
+                        <div class="pricing-price-block">
+                            <div class="pricing-price" data-monthly="149000" data-quarterly="126650" data-yearly="104300">149 000 ₽</div>
+                            <div class="pricing-old-price"></div>
+                            <div class="pricing-period">/месяц</div>
+                            <div class="pricing-savings">Экономия 22 350₽ в месяц</div>
+                        </div>
+                        
+                        <a href="#consultation" class="btn btn-secondary btn-large">Обсудить проект</a>
+                    </div>
+                    
+                    <div class="pricing-features-list">
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="#B6FF2E">
+                                    <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                                </svg>
+                            </div>
+                            <div class="feature-text">
+                                <strong>40+ постов в месяц</strong>
+                                <div class="feature-note">Контент каждый день</div>
+                            </div>
+                        </div>
+                        
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="#B6FF2E">
+                                    <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                                </svg>
+                            </div>
+                            <div class="feature-text">
+                                <strong>Ежедневные сторис + видео</strong>
+                                <div class="feature-note">Reels, TikTok, YouTube Shorts</div>
+                            </div>
+                        </div>
+                        
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="#B6FF2E">
+                                    <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                                </svg>
+                            </div>
+                            <div class="feature-text">
+                                <strong>5+ рекламных кампаний</strong>
+                                <div class="feature-note">Мультиканальный подход</div>
+                            </div>
+                        </div>
+                        
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="#B6FF2E">
+                                    <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                                </svg>
+                            </div>
+                            <div class="feature-text">
+                                <strong>Выделенная команда</strong>
+                                <div class="feature-note">4 специалиста на проект</div>
+                            </div>
+                        </div>
+                        
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="#B6FF2E">
+                                    <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                                </svg>
+                            </div>
+                            <div class="feature-text">
+                                <strong>AI-аналитика и прогнозы</strong>
+                                <div class="feature-note">Прогнозирование трендов</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="pricing-card-footer">
+                        <p><strong>Идеально для:</strong> лидеров рынка, b2b, средний чек от 50 000₽</p>
+                        <p><strong>Ожидаемый ROI:</strong> 5-8x за 3 месяца</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Дополнительная информация -->
+            <div class="pricing-extra-info">
+                <div class="info-card">
+                    <h3>
+                        <span class="icon">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="#B6FF2E">
+                                <path d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V7z"/>
+                            </svg>
+                        </span>
+                        Время на старт
+                    </h3>
+                    <p>Подготовка к запуску занимает 3-7 дней в зависимости от тарифа. Включает брифинг, аудит, разработку стратегии.</p>
+                </div>
+                
+                <div class="info-card">
+                    <h3>
+                        <span class="icon">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="#B6FF2E">
+                                <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"/>
+                            </svg>
+                        </span>
+                        Отчётность
+                    </h3>
+                    <p>Еженедельные отчёты + ежемесячная презентация результатов. Все данные доступны в реальном времени в дашборде.</p>
+                </div>
+                
+                <div class="info-card">
+                    <h3>
+                        <span class="icon">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="#B6FF2E">
+                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                            </svg>
+                        </span>
+                        Гарантии
+                    </h3>
+                    <p>Работаем по договору с гарантией KPI. Если не достигаем согласованных показателей - возвращаем часть оплаты.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Визуализация ROI -->
+    <section class="roi-visualization" id="roi">
+        <div class="container">
+            <div class="roi-content">
+                <h2 class="section-title">Каждая инвестиция должна окупаться</h2>
+                <p class="section-subtitle">Вот как выглядит возврат инвестиций с нашими тарифами</p>
+                
+                <div class="roi-stats">
+                    <div class="roi-stat">
+                        <span class="roi-stat-value">2-3x</span>
+                        <span class="roi-stat-label">Тариф Start<br>за 3 месяца</span>
+                    </div>
+                    
+                    <div class="roi-stat">
+                        <span class="roi-stat-value">3-5x</span>
+                        <span class="roi-stat-label">Тариф Growth<br>за 3 месяца</span>
+                    </div>
+                    
+                    <div class="roi-stat">
+                        <span class="roi-stat-value">5-8x</span>
+                        <span class="roi-stat-label">Тариф Pro<br>за 3 месяца</span>
+                    </div>
+                </div>
+                
+                <p style="margin-top: 40px; font-size: 1.1rem;">
+                    <strong>Пример:</strong> При инвестиции 89 000₽ в месяц (Growth тариф) средний возврат составляет 356 000₽ через 3 месяца. 
+                    Чистая прибыль: <strong style="color: var(--color-green);">267 000₽</strong>.
+                </p>
+            </div>
+            
+            <div class="roi-visual">
+                <svg width="400" height="300" viewBox="0 0 400 300">
+                    <!-- График ROI -->
+                    <path d="M50,250 L100,200 L150,180 L200,150 L250,120 L300,100 L350,80" stroke="#B6FF2E" stroke-width="4" fill="none"/>
+                    <circle cx="50" cy="250" r="6" fill="#B6FF2E"/>
+                    <circle cx="100" cy="200" r="6" fill="#B6FF2E"/>
+                    <circle cx="150" cy="180" r="6" fill="#B6FF2E"/>
+                    <circle cx="200" cy="150" r="6" fill="#B6FF2E"/>
+                    <circle cx="250" cy="120" r="6" fill="#B6FF2E"/>
+                    <circle cx="300" cy="100" r="6" fill="#B6FF2E"/>
+                    <circle cx="350" cy="80" r="6" fill="#B6FF2E"/>
+                    
+                    <!-- Подписи -->
+                    <text x="50" y="270" fill="#B6FF2E" text-anchor="middle" font-size="12">1 мес</text>
+                    <text x="200" y="270" fill="#B6FF2E" text-anchor="middle" font-size="12">3 мес</text>
+                    <text x="350" y="270" fill="#B6FF2E" text-anchor="middle" font-size="12">6 мес</text>
+                    
+                    <text x="370" y="85" fill="#B6FF2E" font-size="14" font-weight="bold">8x ROI</text>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- Детализированная таблица сравнения -->
+    <section class="detailed-comparison" id="dcomparison">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Детальное сравнение возможностей</h2>
+                <p class="section-subtitle">Все функции и ограничения в одной таблице</p>
+            </div>
+            
+            <div class="comparison-table-container">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th class="category">Функция</th>
+                            <th>Start</th>
+                            <th>Growth</th>
+                            <th>Pro</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="category">Контент-план</td>
+                            <td class="included">✓</td>
+                            <td class="included">✓</td>
+                            <td class="included">✓</td>
+                        </tr>
+                        <tr>
+                            <td class="category">Количество постов в месяц</td>
+                            <td>12</td>
+                            <td>24</td>
+                            <td>40+</td>
+                        </tr>
+                        <tr>
+                            <td class="category">Видеоконтент (Reels/TikTok)</td>
+                            <td class="not-included">✗</td>
+                            <td class="limited">4 в месяц</td>
+                            <td class="included">12+ в месяц</td>
+                        </tr>
+                        <tr>
+                            <td class="category">Рекламные кампании</td>
+                            <td>1</td>
+                            <td>3</td>
+                            <td>5+</td>
+                        </tr>
+                        <tr>
+                            <td class="category">A/B тестирование креативов</td>
+                            <td class="limited">Базовое</td>
+                            <td class="included">✓</td>
+                            <td class="included">✓</td>
+                        </tr>
+                        <tr>
+                            <td class="category">Сквозная аналитика</td>
+                            <td class="not-included">✗</td>
+                            <td class="included">✓</td>
+                            <td class="included">✓</td>
+                        </tr>
+                        <tr>
+                            <td class="category">Персональный дашборд</td>
+                            <td class="not-included">✗</td>
+                            <td class="included">✓</td>
+                            <td class="included">✓</td>
+                        </tr>
+                        <tr>
+                            <td class="category">AI-аналитика и прогнозы</td>
+                            <td class="not-included">✗</td>
+                            <td class="not-included">✗</td>
+                            <td class="included">✓</td>
+                        </tr>
+                        <tr>
+                            <td class="category">Выделенная команда</td>
+                            <td>1 специалист</td>
+                            <td>2 специалиста</td>
+                            <td>4 специалиста</td>
+                        </tr>
+                        <tr>
+                            <td class="category">Стратегические созвоны</td>
+                            <td>2 в месяц</td>
+                            <td>4 в месяц</td>
+                            <td>Еженедельно</td>
+                        </tr>
+                        <tr>
+                            <td class="category">Гарантия ROI</td>
+                            <td class="not-included">✗</td>
+                            <td class="included">✓</td>
+                            <td class="included">✓</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Дополнительные услуги -->
+    <section class="addon-services">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Дополнительные услуги</h2>
+                <p class="section-subtitle">Расширьте возможности вашего тарифа</p>
+            </div>
+            
+            <div class="addon-grid">
+                <div class="addon-card">
+                    <h3>Интенсив по контенту</h3>
+                    <p>2-недельный спринт по созданию контент-стратегии и производству контента</p>
+                    <div class="addon-price">от 25 000 ₽</div>
+                    <a href="#consultation" class="btn btn-secondary add-service-btn" data-service="Интенсив по контенту" data-price="25 000">Добавить к тарифу</a>
+                </div>
+                
+                <div class="addon-card">
+                    <h3>Аудит конкурентов</h3>
+                    <p>Полный анализ 5 основных конкурентов с рекомендациями по улучшению</p>
+                    <div class="addon-price">15 000 ₽</div>
+                    <a href="#consultation" class="btn btn-secondary add-service-btn" data-service="Аудит конкурентов" data-price="15 000">Добавить к тарифу</a>
+                </div>
+                
+                <div class="addon-card">
+                    <h3>Рекламный бюджет x2</h3>
+                    <p>Удвойте эффективность рекламы с увеличенным бюджетом и оптимизацией</p>
+                    <div class="addon-price">+50% к тарифу</div>
+                    <a href="#consultation" class="btn btn-secondary add-service-btn" data-service="Рекламный бюджет x2" data-price="+50% к тарифу">Добавить к тарифу</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ с категориями -->
+    <section class="faq-categories" id="faq">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Частые вопросы о тарифах</h2>
+                <p class="section-subtitle">Ответы на самые популярные вопросы</p>
+            </div>
+            
+            <div class="category-tabs">
+                <button class="category-tab active" data-category="general">Общие вопросы</button>
+                <button class="category-tab" data-category="payment">Оплата и договор</button>
+                <button class="category-tab" data-category="start">Начало работы</button>
+                <button class="category-tab" data-category="results">Результаты и отчётность</button>
+            </div>
+            
+            <!-- Категория: Общие вопросы -->
+            <div class="faq-category active" id="general">
+                <div class="faq-accordion">
+                    <div class="faq-item active">
+                        <button class="faq-question">
+                            <span>Можно ли изменить тариф в процессе работы?</span>
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="2" fill="none"/>
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Да, вы можете изменить тариф в любой момент. При переходе на более высокий тариф разница оплачивается пропорционально оставшимся дням в текущем месяце. При переходе на более низкий тариф остаток средств переносится на следующий расчетный период.</p>
+                            <p>Все изменения вступают в силу с первого числа следующего месяца после заявки.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>Есть ли договор и какие гарантии?</span>
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="2" fill="none"/>
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Да, мы работаем только по официальному договору. В договоре прописываются:</p>
+                            <ul>
+                                <li>Конкретные KPI и цели на первые 3 месяца</li>
+                                <li>Объем работ и сроки выполнения</li>
+                                <li>Условия оплаты и порядок расчетов</li>
+                                <li>Гарантия возврата 50% оплаты, если KPI не достигнуты</li>
+                                <li>Порядок предоставления отчетности</li>
+                            </ul>
+                            <p>Мы также предоставляем все закрывающие документы для бухгалтерии.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>Сколько времени нужно для старта?</span>
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="2" fill="none"/>
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p>После подписания договора и оплаты работа начинается в течение 24 часов. Полный цикл старта проекта:</p>
+                            <ol>
+                                <li><strong>День 1-2:</strong> Глубокий аудит текущего состояния и конкурентов</li>
+                                <li><strong>День 3-4:</strong> Разработка стратегии и контент-плана</li>
+                                <li><strong>День 5-7:</strong> Создание первого контента и запуск рекламных кампаний</li>
+                            </ol>
+                            <p>Первые результаты в виде увеличения вовлеченности видны через 7-10 дней.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Категория: Оплата и договор -->
+            <div class="faq-category" id="payment">
+                <div class="faq-accordion">
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>Как происходит оплата?</span>
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="2" fill="none"/>
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Оплата происходит по 100% предоплате за каждый месяц работы. Доступные способы оплаты:</p>
+                            <ul>
+                                <li>Безналичный расчет для юридических лиц и ИП</li>
+                                <li>Перевод на банковскую карту</li>
+                                <li>Через онлайн-банк по счету</li>
+                            </ul>
+                            <p>При оплате за квартал предоставляется скидка 15%, за год - 30%.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>Можно ли приостановить сотрудничество?</span>
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="2" fill="none"/>
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Да, сотрудничество можно приостановить с уведомлением за 14 дней. При этом:</p>
+                            <ul>
+                                <li>Оплата за неиспользованный период возвращается</li>
+                                <li>Вы получаете все материалы, созданные за время работы</li>
+                                <li>Мы проводим финальный аудит и даем рекомендации по дальнейшему самостоятельному ведению</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>Есть ли возможность рассрочки?</span>
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="2" fill="none"/>
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Для постоянных клиентов и при заказе услуг на сумму свыше 300 000 рублей мы предоставляем рассрочку платежа на 2-3 месяца. Подробные условия обсуждаются индивидуально с менеджером.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Категория: Начало работы -->
+            <div class="faq-category" id="start">
+                <div class="faq-accordion">
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>Как быстро можно начать работу?</span>
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="2" fill="none"/>
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Работу можно начать в течение 24 часов после подписания договора и оплаты. Первые результаты видны уже через 7-10 дней.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>Что нужно для начала работы?</span>
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="2" fill="none"/>
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Для начала работы необходимо:</p>
+                            <ul>
+                                <li>Подписать договор</li>
+                                <li>Внести оплату за первый месяц</li>
+                                <li>Предоставить доступ к социальным сетям</li>
+                                <li>Провести брифинг с нашим менеджером</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>Как проходит брифинг?</span>
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="2" fill="none"/>
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Брифинг проводится онлайн через Zoom или Google Meet. На встрече мы обсуждаем:</p>
+                            <ul>
+                                <li>Цели и задачи проекта</li>
+                                <li>Целевую аудиторию</li>
+                                <li>Конкурентов</li>
+                                <li>Уникальное торговое предложение</li>
+                                <li>Ключевые показатели эффективности</li>
+                            </ul>
+                            <p>Длительность брифинга - 1-1.5 часа.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Категория: Результаты и отчётность -->
+            <div class="faq-category" id="results">
+                <div class="faq-accordion">
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>Как часто предоставляется отчетность?</span>
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="2" fill="none"/>
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Мы предоставляем два вида отчетности:</p>
+                            <ul>
+                                <li><strong>Еженедельно:</strong> отчет о проделанной работе и текущих результатах</li>
+                                <li><strong>Ежемесячно:</strong> детальный отчет с анализом достижения KPI и планами на следующий месяц</li>
+                            </ul>
+                            <p>Все отчеты доступны в вашем личном кабинете.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>Какие KPI вы гарантируете?</span>
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="2" fill="none"/>
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p>KPI согласуются индивидуально для каждого проекта. Обычно это:</p>
+                            <ul>
+                                <li>Увеличение числа подписчиков на 15-30% в месяц</li>
+                                <li>Рост охватов на 20-40% в месяц</li>
+                                <li>Увеличение вовлеченности на 25-50%</li>
+                                <li>Конкретное количество заявок/продаж</li>
+                            </ul>
+                            <p>Все KPI прописываются в договоре.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>Что делать, если KPI не достигнуты?</span>
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="2" fill="none"/>
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p>В случае невыполнения KPI мы:</p>
+                            <ol>
+                                <li>Проводим детальный анализ причин</li>
+                                <li>Вносим коррективы в стратегию</li>
+                                <li>Усиливаем работу по слабым направлениям</li>
+                                <li>Возвращаем 50% оплаты за месяц, если KPI не достигнуты по нашей вине</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA секция -->
+    <section class="cta-section" id="consultation">
+        <div class="container">
+            <div class="cta-card">
+                <div class="cta-content">
+                    <h2 class="cta-title">Не можете выбрать тариф?</h2>
+                    <p class="cta-text">Пройдите бесплатный аудит и получите персонализированную рекомендацию по выбору тарифа</p>
+                    
+                    <form class="consult-form">
+                        <div class="form-group">
+                            <input type="text" placeholder="Ваше имя" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" placeholder="Телефон" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" placeholder="Email" required>
+                        </div>
+                        <div class="form-group">
+                            <select required>
+                                <option value="" disabled selected>Ежемесячный бюджет на маркетинг</option>
+                                <option value="20-50">20 000 - 50 000 ₽</option>
+                                <option value="50-100">50 000 - 100 000 ₽</option>
+                                <option value="100-200">100 000 - 200 000 ₽</option>
+                                <option value="200+">Более 200 000 ₽</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-large">Получить рекомендацию по тарифу</button>
+                    </form>
+                    
+                    <p class="form-note">Наш эксперт свяжется с вами в течение 2 часов, проведет аудит и порекомендует оптимальный тариф</p>
+                </div>
+                
+                <div class="cta-visual">
+                    <div class="decorative-star">
+                        <svg width="100" height="100" viewBox="0 0 100 100">
+                            <polygon points="50,15 61,40 88,40 66,55 72,82 50,68 28,82 34,55 12,40 39,40" fill="#B6FF2E" fill-opacity="0.2"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="index.html" class="footer-logo">
+                        <div class="logo-icon">
+                            <svg width="40" height="40" viewBox="0 0 40 40">
+                                <circle cx="20" cy="20" r="18" stroke="#B6FF2E" stroke-width="3" fill="none"/>
+                                <polygon points="20,8 26,18 32,18 26,24 28,32 20,26 12,32 14,24 8,18 14,18" fill="#B6FF2E"/>
+                            </svg>
+                        </div>
+                        <div class="logo-text">
+                            <span class="logo-title">MGC Group</span>
+                            <span class="logo-subtitle">Most Grateful Company</span>
+                        </div>
+                    </a>
+                    <p class="footer-description">Команда маркетинговых экспертов, которая помогает бизнесу получать заявки и продажи из соцсетей.</p>
+                    
+                    <div class="social-links">
+                        <a href="#" aria-label="Telegram">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.41 1-.67 1-.58 0-1.03-.43-1.6-.85-.88-.64-1.38-1.04-2.24-1.67-.99-.71-.35-1.1.22-1.74.15-.16 2.71-2.48 2.76-2.69.01-.03.01-.14-.06-.2-.07-.06-.17-.04-.24-.03-.1.02-1.79 1.12-5.06 3.31-.48.33-.92.49-1.31.48-.43-.01-1.27-.24-1.89-.44-.76-.25-1.36-.38-1.31-.8.03-.24.28-.48.77-.73 2.99-1.39 4.99-2.31 6-2.78 2.78-1.03 3.36-1.21 3.74-1.21.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.28 0 0z"/>
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="VK">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.9 13.4c-.2.5-.6.9-1.1 1.1-.5.2-1 .2-1.5 0-.3-.1-.6-.3-.9-.5-.1-.1-.3-.2-.4-.3 0-.1-.1-.2-.1-.3 0-.1 0-.2-.1-.3l-.4.3c-.3.2-.6.4-.9.5-.5.2-1 .2-1.5 0-.5-.2-.9-.6-1.1-1.1-.2-.5-.2-1 0-1.5.1-.3.3-.6.5-.9.1-.1.2-.3.3-.4 0-.1.1-.2.1-.3 0-.1 0-.2-.1-.3l-.3-.4c-.2-.3-.4-.6-.5-.9-.2-.5-.2-1 0-1.5.2-.5.6-.9 1.1-1.1.5-.2 1-.2 1.5 0 .3.1.6.3.9.5.1.1.3.2.4.3.1 0 .2.1.3.1.1 0 .2 0 .3-.1l.4-.3c.3-.2.6-.4.9-.5.5-.2 1-.2 1.5 0 .5.2.9.6 1.1 1.1.2.5.2 1 0 1.5-.1.3-.3.6-.5.9-.1.1-.2.3-.3.4 0-.1-.1.2-.1.3 0 .1 0 .2.1.3l.3.4c.2.3.4.6.5.9.2.5.2 1 0 1.5z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-title">Навигация</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="pricing.html">Тарифы</a></li>
+                        <li><a href="team.html">Эксперты и отзывы</a></li>
+                        <li><a href="contact.html">Помощь</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-title">Услуги</h3>
+                    <ul class="footer-links">
+                        <li><a href="contact.html">SMM ведение</a></li>
+                        <li><a href="contact.html">Таргетированная реклама</a></li>
+                        <li><a href="contact.html">Контент-стратегия</a></li>
+                        <li><a href="contact.html">Аудит соцсетей</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-title">Контакты</h3>
+                    <ul class="footer-contacts">
+                        <li>
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="#B6FF2E">
+                                <path d="M14.5 1.5h-13c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h13c.55 0 1-.45 1-1v-10c0-.55-.45-1-1-1zm-13 1h13v.88l-6.5 4.33-6.5-4.33v-.88zm13 10h-13v-8.12l6.5 4.33 6.5-4.33v8.12z"/>
+                            </svg>
+                            <span>mgcgroup@business.com</span>
+                        </li>
+                        <li>
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="#B6FF2E">
+                                <path d="M11 1c-.55 0-1 .45-1 1v.5c0 .28.22.5.5.5s.5-.22.5-.5v-.5c0-.28.22-.5.5-.5s.5.22.5.5v.5c0 .28.22.5.5.5s.5-.22.5-.5v-.5c0-.55-.45-1-1-1h-1zm-1 2c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1c0-.55-.45-1-1-1h-1c-.55 0-1 .45-1 1v1zm-7.5 1c-.28 0-.5.22-.5.5v10c0 .28.22.5.5.5h10c.28 0 .5-.22.5-.5v-10c0-.28-.22-.5-.5-.5h-10zm.5 1h9v9h-9v-9zm4.5 6c-.28 0-.5.22-.5.5s.22.5.5.5h1c.28 0 .5-.22.5-.5s-.22-.5-.5-.5h-1zm-3-3c-.28 0-.5.22-.5.5s.22.5.5.5h7c.28 0 .5-.22.5-.5s-.22-.5-.5-.5h-7zm0 2c-.28 0-.5.22-.5.5s.22.5.5.5h5c.28 0 .5-.22.5-.5s-.22-.5-.5-.5h-5z"/>
+                            </svg>
+                            <span>+7 (977) 569 99 00</span>
+                        </li>
+                        <li>
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="#B6FF2E">
+                                <path d="M8 0C3.58 0 0 3.58 0 8s3.58 8 8 8 8-3.58 8-8S12.42 0 8 0zm0 14.5c-3.59 0-6.5-2.91-6.5-6.5S4.41 1.5 8 1.5s6.5 2.91 6.5 6.5-2.91 6.5-6.5 6.5zM8 4c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 6.5c-1.38 0-2.5-1.12-2.5-2.5S6.62 5.5 8 5.5s2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                            </svg>
+                            <span>Москва, Пресненская набережная, д 12, корпус 1, строение 1</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-copyright">© 2023 MGC Group. Most Grateful Company. Все права защищены.</div>
+                <div class="footer-legal">
+                    <a href="#" onclick="openModal('privacyModal'); return false;">Политика конфиденциальности</a>
+                    <a href="#" onclick="openModal('offerModal'); return false;">Договор-оферта</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Модальное окно Политика конфиденциальности -->
+<div class="modal-overlay" id="privacyModal">
+    <div class="modal-container">
+        <div class="modal-header">
+            <h2>Политика конфиденциальности</h2>
+            <button class="modal-close" onclick="closeModal('privacyModal')">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                </svg>
+            </button>
+        </div>
+        
+        <div class="modal-content">
+            <div class="document-section">
+                <h3>1. Общие положения</h3>
+                <p>Настоящая Политика конфиденциальности персональных данных (далее — Политика) действует в отношении всей информации, которую MGC Group (далее — Компания) может получить о Пользователе во время использования сайта, услуг, программ и продуктов Компании.</p>
+            </div>
+            
+            <div class="document-section">
+                <h3>2. Собираемая информация</h3>
+                <p>При работе с нами мы можем собирать следующую информацию:</p>
+                <ul>
+                    <li>Фамилия, имя, отчество</li>
+                    <li>Контактный телефон и адрес электронной почты</li>
+                    <li>Название компании и должность</li>
+                    <li>Данные о проекте и бизнес-задачах</li>
+                    <li>История обращений и переписки</li>
+                    <li>Данные об использовании наших услуг</li>
+                </ul>
+            </div>
+            
+            <div class="document-section">
+                <h3>3. Цели сбора информации</h3>
+                <ul>
+                    <li>Предоставление консультаций и услуг</li>
+                    <li>Обработка заявок и обращений</li>
+                    <li>Улучшение качества предоставляемых услуг</li>
+                    <li>Информирование о новых услугах и акциях</li>
+                    <li>Выполнение договорных обязательств</li>
+                    <li>Соблюдение требований законодательства</li>
+                </ul>
+            </div>
+            
+            <div class="document-section">
+                <h3>4. Защита персональных данных</h3>
+                <p>Мы принимаем необходимые организационные и технические меры для защиты персональных данных от неправомерного или случайного доступа, уничтожения, изменения, блокирования, копирования, распространения, а также от иных неправомерных действий.</p>
+                <p>Доступ к персональным данным имеют только уполномоченные сотрудники Компании, которые приняли обязательство о сохранении конфиденциальности.</p>
+            </div>
+            
+            <div class="document-section">
+                <h3>5. Передача информации третьим лицам</h3>
+                <p>Мы не передаем персональные данные третьим лицам, за исключением следующих случаев:</p>
+                <ul>
+                    <li>С согласия Пользователя</li>
+                    <li>По требованию уполномоченных государственных органов</li>
+                    <li>Для исполнения договорных обязательств</li>
+                    <li>При использовании сервисов и серверов, расположенных за пределами РФ</li>
+                </ul>
+            </div>
+            
+            <div class="document-section">
+                <h3>6. Cookies и аналитика</h3>
+                <p>Наш сайт использует файлы cookie и аналогичные технологии для анализа посещаемости, запоминания предпочтений и обеспечения безопасности.</p>
+                <p>Вы можете отключить cookies в настройках браузера, однако это может повлиять на работу сайта.</p>
+            </div>
+            
+            <div class="document-section">
+                <h3>7. Права Пользователя</h3>
+                <ul>
+                    <li>Получать информацию об обработке своих персональных данных</li>
+                    <li>Требовать уточнения, блокирования или уничтожения данных</li>
+                    <li>Отозвать согласие на обработку персональных данных</li>
+                    <li>Обжаловать действия или бездействие Компании</li>
+                </ul>
+            </div>
+            
+            <div class="document-section">
+                <h3>8. Хранение данных</h3>
+                <p>Персональные данные хранятся в течение срока, необходимого для достижения целей обработки, или до отзыва согласия Пользователем.</p>
+                <p>По истечении срока хранения данные уничтожаются или обезличиваются.</p>
+            </div>
+            
+            <div class="document-section">
+                <h3>9. Контакты</h3>
+                <p>По вопросам, связанным с обработкой персональных данных, обращайтесь:</p>
+                <p><strong>Email:</strong> privacy@mgcgroup.ru</p>
+                <p><strong>Телефон:</strong> +7 (977) 569 99 00</p>
+                <p><strong>Адрес:</strong> Москва, Пресненская набережная, д 12, корпус 1</p>
+            </div>
+            
+            <div class="document-section">
+                <h3>10. Изменения в Политике</h3>
+                <p>Мы оставляем за собой право вносить изменения в настоящую Политику. Новая редакция вступает в силу с момента ее размещения на сайте.</p>
+                <p><em>Последнее обновление: 15 января 2024 года</em></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Модальное окно Договор-оферта -->
+<div class="modal-overlay" id="offerModal">
+    <div class="modal-container">
+        <div class="modal-header">
+            <h2>Договор-оферта на оказание услуг</h2>
+            <button class="modal-close" onclick="closeModal('offerModal')">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                </svg>
+            </button>
+        </div>
+        
+        <div class="modal-content">
+            <div class="document-section">
+                <h3>1. ТЕРМИНЫ И ОПРЕДЕЛЕНИЯ</h3>
+                <p><strong>1.1. Исполнитель</strong> — MGC Group (Most Grateful Company), ИНН 7701234567, оказывающий услуги по настоящему Договору.</p>
+                <p><strong>1.2. Заказчик</strong> — физическое или юридическое лицо, принявшее условия настоящей оферты.</p>
+                <p><strong>1.3. Услуги</strong> — услуги по ведению и продвижению аккаунтов в социальных сетях.</p>
+            </div>
+            
+            <div class="document-section">
+                <h3>2. ПРЕДМЕТ ДОГОВОРА</h3>
+                <p><strong>2.1.</strong> Исполнитель обязуется оказать Заказчику услуги по продвижению в социальных сетях, а Заказчик обязуется оплатить эти услуги.</p>
+                <p><strong>2.2.</strong> Перечень услуг, их объем и стоимость определяются в Приложении №1, которое является неотъемлемой частью Договора.</p>
+                <p><strong>2.3.</strong> Акцептом настоящей оферты считается оплата услуг или подписание Заказчиком Спецификации услуг.</p>
+            </div>
+            
+            <div class="document-section">
+                <h3>3. СТОИМОСТЬ УСЛУГ И ПОРЯДОК РАСЧЕТОВ</h3>
+                <p><strong>3.1.</strong> Стоимость услуг указана в Приложении №1. Все цены указаны в рублях РФ.</p>
+                <p><strong>3.2.</strong> Оплата производится ежемесячно, не позднее 5 числа месяца, следующего за расчетным.</p>
+                <p><strong>3.3.</strong> Исполнитель выставляет Заказчику счет на оплату. Счет действителен в течение 5 банковских дней.</p>
+            </div>
+            
+            <div class="document-section">
+                <h3>4. ПРАВА И ОБЯЗАННОСТИ СТОРОН</h3>
+                <p><strong>Исполнитель обязуется:</strong></p>
+                <ul>
+                    <li>Оказывать услуги в соответствии с условиями Договора</li>
+                    <li>Предоставлять еженедельные отчеты о проделанной работе</li>
+                    <li>Соблюдать конфиденциальность информации Заказчика</li>
+                    <li>Вносить корректировки в стратегию по согласованию с Заказчиком</li>
+                </ul>
+                
+                <p><strong>Заказчик обязуется:</strong></p>
+                <ul>
+                    <li>Своевременно оплачивать услуги</li>
+                    <li>Предоставлять необходимую информацию и материалы</li>
+                    <li>Согласовывать контент в течение 2 рабочих дней</li>
+                    <li>Предоставить доступ к аккаунтам социальных сетей</li>
+                </ul>
+            </div>
+            
+            <div class="document-section">
+                <h3>5. СРОКИ ИСПОЛНЕНИЯ ОБЯЗАТЕЛЬСТВ</h3>
+                <p><strong>5.1.</strong> Договор вступает в силу с момента его акцепта Заказчиком и действует до полного исполнения обязательств.</p>
+                <p><strong>5.2.</strong> Минимальный срок оказания услуг — <strong>3 месяца</strong>.</p>
+                <p><strong>5.3.</strong> Стороны вправе расторгнуть Договор, уведомив другую сторону за 14 календарных дней.</p>
+            </div>
+            
+            <div class="document-section">
+                <h3>6. ГАРАНТИИ И ОТВЕТСТВЕННОСТЬ</h3>
+                <p><strong>6.1.</strong> Исполнитель не гарантирует достижение конкретных коммерческих результатов.</p>
+                <p><strong>6.2.</strong> Стороны освобождаются от ответственности при наступлении обстоятельств непреодолимой силы.</p>
+                <p><strong>6.3.</strong> Ответственность Исполнителя ограничена стоимостью услуг за 1 месяц.</p>
+            </div>
+            
+            <div class="document-section">
+                <h3>7. КОНФИДЕНЦИАЛЬНОСТЬ</h3>
+                <p><strong>7.1.</strong> Стороны обязуются сохранять конфиденциальность коммерческой информации.</p>
+                <p><strong>7.2.</strong> Обязательство о конфиденциальности действует в течение 3 лет после прекращения Договора.</p>
+            </div>
+            
+            <div class="document-section">
+                <h3>8. РАЗРЕШЕНИЕ СПОРОВ</h3>
+                <p><strong>8.1.</strong> Все споры решаются путем переговоров.</p>
+                <p><strong>8.2.</strong> При недостижении согласия спор передается в суд по месту нахождения Исполнителя.</p>
+            </div>
+            
+            <div class="document-section">
+                <h3>9. ПРОЧИЕ УСЛОВИЯ</h3>
+                <p><strong>9.1.</strong> Договор составлен в двух экземплярах, имеющих равную юридическую силу.</p>
+                <p><strong>9.2.</strong> Все изменения оформляются дополнительными соглашениями.</p>
+                <p><strong>9.3.</strong> Уведомления направляются на email-адреса, указанные при заключении Договора.</p>
+            </div>
+            
+            <div class="document-section signature-block">
+                <h3>РЕКВИЗИТЫ ИСПОЛНИТЕЛЯ:</h3>
+                <p><strong>MGC Group (Most Grateful Company)</strong></p>
+                <p>ИНН: 7701234567 • КПП: 770101001</p>
+                <p>ОГРН: 1234567890123</p>
+                <p>Адрес: 123112, г. Москва, Пресненская наб., д. 12, корп. 1</p>
+                <p>Р/с: 40702810901234567890 в ПАО "Сбербанк"</p>
+                <p>БИК: 044525225</p>
+                <p>Телефон: +7 (977) 569 99 00</p>
+                <p>Email: legal@mgcgroup.ru</p>
+                <p class="signature-date"><strong>Дата составления:</strong> 15 января 2024 года</p>
+            </div>
+        </div>
+    </div>
+</div>
+    
+    <script>
+        // Функция для форматирования цены с пробелами
+        function formatPrice(price) {
+            return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+        }
+
+        // 1. Переключение периодов оплаты (ежемесячно/квартально/годовой)
+        document.querySelectorAll('.period-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Обновляем активную кнопку
+                document.querySelectorAll('.period-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                const period = this.dataset.period;
+                
+                // Обходим все карточки тарифов
+                document.querySelectorAll('.pricing-card-v2').forEach(card => {
+                    const priceEl = card.querySelector('.pricing-price');
+                    const oldPriceEl = card.querySelector('.pricing-old-price');
+                    const savingsEl = card.querySelector('.pricing-savings');
+                    
+                    // Получаем базовую ежемесячную цену
+                    const basePrice = parseInt(priceEl.getAttribute('data-monthly'));
+                    
+                    // Рассчитываем цену в зависимости от периода
+                    if (period === 'monthly') {
+                        // Ежемесячная оплата - базовая цена
+                        const newPrice = basePrice;
+                        priceEl.textContent = formatPrice(newPrice) + ' ₽';
+                        oldPriceEl.style.display = 'none';
+                        savingsEl.style.display = 'none';
+                    } 
+                    else if (period === 'quarterly') {
+                        // Квартальная оплата - 15% скидка
+                        const monthlyPriceWithDiscount = Math.round(basePrice * 0.85); // -15%
+                        const quarterlyTotalWithoutDiscount = basePrice * 3;
+                        
+                        priceEl.textContent = formatPrice(monthlyPriceWithDiscount) + ' ₽';
+                        oldPriceEl.textContent = formatPrice(quarterlyTotalWithoutDiscount) + ' ₽ за квартал';
+                        oldPriceEl.style.display = 'block';
+                        
+                        const savingsPerMonth = basePrice - monthlyPriceWithDiscount;
+                        savingsEl.textContent = 'Экономия ' + formatPrice(savingsPerMonth) + '₽ в месяц';
+                        savingsEl.style.display = 'block';
+                    } 
+                    else if (period === 'yearly') {
+                        // Годовая оплата - 30% скидка
+                        const monthlyPriceWithDiscount = Math.round(basePrice * 0.70); // -30%
+                        const yearlyTotalWithoutDiscount = basePrice * 12;
+                        
+                        priceEl.textContent = formatPrice(monthlyPriceWithDiscount) + ' ₽';
+                        oldPriceEl.textContent = formatPrice(yearlyTotalWithoutDiscount) + ' ₽ за год';
+                        oldPriceEl.style.display = 'block';
+                        
+                        const savingsPerMonth = basePrice - monthlyPriceWithDiscount;
+                        savingsEl.textContent = 'Экономия ' + formatPrice(savingsPerMonth) + '₽ в месяц';
+                        savingsEl.style.display = 'block';
+                    }
+                });
+            });
+        });
+
+        // 2. Переключение категорий FAQ
+        document.querySelectorAll('.category-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                const category = this.dataset.category;
+                
+                // Обновляем активную кнопку
+                document.querySelectorAll('.category-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Показываем соответствующую категорию
+                document.querySelectorAll('.faq-category').forEach(cat => {
+                    cat.classList.remove('active');
+                });
+                document.getElementById(category).classList.add('active');
+                
+                // Закрываем все открытые вопросы при переключении категории
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+            });
+        });
+
+        // 3. FAQ аккордеон (развертывающийся список)
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const item = question.parentElement;
+                const isActive = item.classList.contains('active');
+                
+                // Закрываем другие вопросы в той же категории
+                const category = item.closest('.faq-category');
+                if (!isActive) {
+                    category.querySelectorAll('.faq-item').forEach(otherItem => {
+                        otherItem.classList.remove('active');
+                    });
+                }
+                
+                // Открываем/закрываем текущий
+                item.classList.toggle('active');
+            });
+        });
+
+        // 4. Обработка кнопок "Добавить к тарифу"
+        document.querySelectorAll('.add-service-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const serviceName = this.dataset.service;
+                const servicePrice = this.dataset.price;
+                
+                // Находим выбранный тариф (для примера берем популярный тариф)
+                const selectedTariff = 'Growth';
+                
+                // Показываем модальное окно
+                showServiceModal(serviceName, servicePrice, selectedTariff);
+            });
+        });
+
+        function showServiceModal(serviceName, servicePrice, tariff) {
+            // Создаем модальное окно
+            const modalHtml = `
+                <div class="modal-overlay" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:10000;display:flex;align-items:center;justify-content:center;">
+                    <div class="modal-content" style="background:white;padding:40px;border-radius:20px;max-width:500px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,0.3);">
+                        <h3 style="margin-bottom:20px;color:#111;">Добавить услугу к тарифу</h3>
+                        <p style="margin-bottom:15px;">Вы хотите добавить услугу:</p>
+                        <p style="font-weight:600;color:#111;margin-bottom:5px;">${serviceName}</p>
+                        <p style="color:#666;margin-bottom:20px;">Стоимость: ${servicePrice}</p>
+                        <p style="margin-bottom:25px;">К тарифу: <span style="font-weight:600;color:#111;">${tariff}</span></p>
+                        <div style="display:flex;gap:15px;margin-top:30px;">
+                            <button onclick="window.location.href='#consultation'; document.querySelector('.modal-overlay')?.remove();" style="background:var(--color-green);color:black;border:none;padding:14px 28px;border-radius:10px;font-weight:600;cursor:pointer;flex:1;">Перейти к оформлению</button>
+                            <button onclick="document.querySelector('.modal-overlay')?.remove();" style="background:#f0f0f0;border:none;padding:14px 28px;border-radius:10px;cursor:pointer;">Отмена</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // Удаляем старые модальные окна если есть
+            document.querySelectorAll('.modal-overlay').forEach(modal => modal.remove());
+            
+            // Добавляем новое модальное окно
+            document.body.insertAdjacentHTML('beforeend', modalHtml);
+        }
+
+        // 5. Плавная прокрутка к секциям
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    const headerHeight = document.querySelector('.header').offsetHeight;
+                    const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Инициализация при загрузке страницы
+        document.addEventListener('DOMContentLoaded', function() {
+            // Активируем первую кнопку периода оплаты
+            const activePeriodBtn = document.querySelector('.period-btn.active');
+            if (activePeriodBtn) {
+                activePeriodBtn.click();
+            }
+            
+            // Активируем первую категорию FAQ
+            const activeFaqCategory = document.querySelector('.category-tab.active');
+            if (activeFaqCategory) {
+                activeFaqCategory.click();
+            }
+            
+            // Открываем первый вопрос в активной категории
+            const activeCategory = document.querySelector('.faq-category.active');
+            if (activeCategory) {
+                const firstQuestion = activeCategory.querySelector('.faq-item');
+                if (firstQuestion) {
+                    firstQuestion.classList.add('active');
+                }
+            }
+        });
+        
+        // Функции для работы с модальными окнами
+function openModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+        modal.style.display = 'block';
+        document.body.style.overflow = 'hidden'; // Блокируем скролл страницы
+        
+        // Добавляем обработчик для закрытия по ESC
+        document.addEventListener('keydown', handleEscKey);
+    }
+}
+
+function closeModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = ''; // Разблокируем скролл страницы
+        
+        // Удаляем обработчик ESC
+        document.removeEventListener('keydown', handleEscKey);
+    }
+}
+
+// Закрытие по ESC
+function handleEscKey(event) {
+    if (event.key === 'Escape') {
+        const modals = document.querySelectorAll('.modal-overlay');
+        modals.forEach(modal => {
+            if (modal.style.display === 'block') {
+                closeModal(modal.id);
+            }
+        });
+    }
+}
+
+// Закрытие при клике вне модального окна
+document.querySelectorAll('.modal-overlay').forEach(modal => {
+    modal.addEventListener('click', function(event) {
+        if (event.target === this) {
+            closeModal(this.id);
+        }
+    });
+});
+
+// Инициализация кликов по ссылкам в футере
+document.addEventListener('DOMContentLoaded', function() {
+    // Обработка кликов по ссылкам в футере
+    const privacyLinks = document.querySelectorAll('a[href*="privacy"], a[href*="конфиденциальности"]');
+    const offerLinks = document.querySelectorAll('a[href*="offer"], a[href*="оферта"]');
+    
+    privacyLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            openModal('privacyModal');
+        });
+    });
+    
+    offerLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            openModal('offerModal');
+        });
+    });
+    
+    // Более специфичные обработчики для футера
+    document.querySelectorAll('.footer-legal a').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (this.textContent.includes('Политика') || this.textContent.includes('конфиденциальности')) {
+                openModal('privacyModal');
+            } else if (this.textContent.includes('Договор') || this.textContent.includes('оферта')) {
+                openModal('offerModal');
+            }
+        });
+    });
+});
+    </script>
+</body>
+</html>

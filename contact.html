@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Помощь и контакты - MGC Group</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="responsive.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+    <style>
+        /* Дополнительные стили для страницы контактов */
+        .contact-hero {
+            text-align: center;
+            padding: 60px 0 40px;
+        }
+        
+        .faq-section {
+            margin-bottom: 60px;
+        }
+        
+        .faq-accordion {
+            max-width: 800px;
+            margin: 30px auto 0;
+        }
+        
+        .faq-item {
+            border-bottom: 1px solid #E5E5E5;
+            margin-bottom: 8px;
+        }
+        
+        .faq-question {
+            width: 100%;
+            text-align: left;
+            background: none;
+            border: none;
+            padding: 20px 0;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--color-black);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .faq-question:hover {
+            color: var(--color-green);
+        }
+        
+        .faq-question svg {
+            transition: transform 0.3s ease;
+        }
+        
+        .faq-item.active .faq-question svg {
+            transform: rotate(180deg);
+        }
+        
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            padding-bottom: 20px;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 30px;
+        }
+        
+        .contact-info {
+            background: var(--color-white);
+            border-radius: var(--radius-card);
+            padding: 30px;
+            box-shadow: var(--shadow-card);
+        }
+        
+        .contact-method {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 24px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid #E5E5E5;
+        }
+        
+        .contact-method:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .contact-icon {
+            width: 44px;
+            height: 44px;
+            background: rgba(182, 255, 46, 0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        
+        .contact-details h4 {
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+        
+        .contact-details p {
+            color: var(--color-gray);
+            margin-bottom: 4px;
+            font-size: 0.95rem;
+        }
+        
+        .contact-link {
+            color: var(--color-green);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            font-size: 1rem;
+        }
+        
+        .contact-link:hover {
+            text-decoration: underline;
+        }
+        
+        .contact-form-container {
+            background: var(--color-white);
+            border-radius: var(--radius-card);
+            padding: 30px;
+            box-shadow: var(--shadow-card);
+        }
+        
+        .contact-form-container h3 {
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+        
+        textarea {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #E5E5E5;
+            border-radius: var(--radius-button);
+            font-family: var(--font-main);
+            font-size: 0.95rem;
+            transition: var(--transition);
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        textarea:focus {
+            outline: none;
+            border-color: var(--color-green);
+        }
+        
+        .map-container {
+            margin-top: 60px;
+            border-radius: var(--radius-card);
+            overflow: hidden;
+            box-shadow: var(--shadow-card);
+            height: 400px;
+            background: var(--color-beige);
+            position: relative;
+        }
+        
+        #yandex-map {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .map-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #E9E0D1, #F5F0E6);
+            color: var(--color-gray);
+        }
+        
+        .map-placeholder svg {
+            margin-bottom: 16px;
+        }
+        
+        /* Стили для валидации формы */
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #E5E5E5;
+            border-radius: var(--radius-button);
+            font-family: var(--font-main);
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--color-green);
+        }
+        
+        .form-group input.error,
+        .form-group select.error,
+        .form-group textarea.error {
+            border-color: #ff4444;
+        }
+        
+        .form-group input.success,
+        .form-group select.success,
+        .form-group textarea.success {
+            border-color: var(--color-green);
+        }
+        
+        .error-message {
+            color: #ff4444;
+            font-size: 0.85rem;
+            margin-top: 5px;
+            display: none;
+        }
+        
+        .error-message.show {
+            display: block;
+        }
+        
+        .form-note {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: var(--color-gray);
+            text-align: center;
+        }
+        
+        .form-note a {
+            color: var(--color-green);
+            text-decoration: none;
+        }
+        
+        .form-note a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            .contact-hero {
+                padding: 40px 0 30px;
+            }
+            
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+            
+            .map-container {
+                height: 300px;
+                margin-top: 40px;
+            }
+            
+            .contact-info,
+            .contact-form-container {
+                padding: 24px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .contact-hero {
+                padding: 30px 0 20px;
+            }
+            
+            .faq-question {
+                padding: 16px 0;
+                font-size: 1rem;
+            }
+            
+            .contact-method {
+                flex-direction: column;
+                gap: 12px;
+            }
+            
+            .contact-icon {
+                width: 40px;
+                height: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Навигация -->
+    <header class="header">
+        <div class="container">
+            <div class="header-inner">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">
+                        <svg width="40" height="40" viewBox="0 0 40 40">
+                            <circle cx="20" cy="20" r="18" stroke="#B6FF2E" stroke-width="3" fill="none"/>
+                            <polygon points="20,8 26,18 32,18 26,24 28,32 20,26 12,32 14,24 8,18 14,18" fill="#B6FF2E"/>
+                        </svg>
+                    </div>
+                    <div class="logo-text">
+                        <span class="logo-title">MGC Group</span>
+                        <span class="logo-subtitle">Most Grateful Company</span>
+                    </div>
+                </a>
+                
+                <nav class="main-nav">
+                    <button class="mobile-menu-btn" aria-label="Открыть меню">
+                        <span></span><span></span><span></span>
+                    </button>
+                    <ul class="nav-list">
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="pricing.html">Тарифы</a></li>
+                        <li><a href="team.html">Эксперты и отзывы</a></li>
+                        <li><a href="contact.html" class="active">Помощь</a></li>
+                    </ul>
+                </nav>
+                
+                <a href="#form" class="btn btn-primary btn-small">Бесплатный аудит</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero-секция -->
+    <section class="hero contact-hero">
+    <div class="container">
+        <div class="section-header">
+            <h1 class="hero-title">Помощь и ответы</h1>
+            <p class="hero-subtitle">На этой странице мы собрали ответы на самые частые вопросы о наших услугах и сотрудничестве. Если вы не нашли то, что искали, вы всегда можете связаться с нами удобным способом.</p>
+        </div>
+    </div>
+</section>
+
+    <!-- FAQ -->
+    <section class="faq-section">
+        <div class="container">
+            <div class="faq-accordion">
+                <!-- Вопрос 1 -->
+                <div class="faq-item active">
+                    <button class="faq-question">
+                        <span>Сколько времени нужно для первых результатов?</span>
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="2" fill="none"/>
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Первые результаты в виде увеличения вовлеченности и охватов видны уже через 2-3 недели. Увеличение количества заявок и продаж начинается обычно через 1-2 месяца системной работы. Скорость зависит от ниши, конкурентности и текущего состояния ваших соцсетей.</p>
+                    </div>
+                </div>
+                
+                <!-- Вопрос 2 -->
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Что нужно от клиента для старта работы?</span>
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="2" fill="none"/>
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Для старта работы нам нужно: доступ к вашим соцсетям (или создание новых), информация о продукте/услуге, данные о целевой аудитории и конкурентах. Также потребуется выделить контактное лицо для согласования материалов и еженедельных созвонов.</p>
+                    </div>
+                </div>
+                
+                <!-- Вопрос 3 -->
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Работаете ли вы по договору?</span>
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="2" fill="none"/>
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Да, мы работаем только по официальному договору. В договоре прописываются все условия сотрудничества: сроки, KPI, объём работ, стоимость, порядок оплаты и отчётности. Мы также предоставляем все закрывающие документы для бухгалтерии.</p>
+                    </div>
+                </div>
+                
+                <!-- Вопрос 4 -->
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Как часто предоставляются отчёты?</span>
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="2" fill="none"/>
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Мы предоставляем еженедельные отчёты каждый понедельник. В отчёте: ключевые метрики, результаты за неделю, анализ эффективности, планы на следующую неделю. Раз в месяц готовим расширенный аналитический отчёт с детальным разбором результатов и рекомендациями.</p>
+                    </div>
+                </div>
+                
+                <!-- Вопрос 5 -->
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Можно ли заказать только таргетированную рекламу без SMM?</span>
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="2" fill="none"/>
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Да, мы предоставляем услуги таргетированной рекламы отдельно. Однако для максимальной эффективности мы рекомендуем комплексный подход: качественный контент + реклама. Так вы получаете не только платный трафик, но и organic рост, узнаваемость бренда и лояльную аудиторию.</p>
+                    </div>
+                </div>
+                
+                <!-- Вопрос 6 -->
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Как происходит оплата?</span>
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="2" fill="none"/>
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Оплата происходит помесячно по предоплате. После подписания договора вы оплачиваете первый месяц работы. Далее — в начале каждого месяца. Мы принимаем оплату по безналичному расчёту (для юрлиц и ИП) или переводом на карту (для физлиц). Всегда предоставляем закрывающие документы.</p>
+                    </div>
+                </div>
+                
+                <!-- Вопрос 7 -->
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Работаете ли вы с регионами?</span>
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="2" fill="none"/>
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Да, мы успешно работаем с клиентами из разных городов России и СНГ. Весь процесс организован онлайн: созвоны через Zoom/Teams, общение в Telegram/WhatsApp, отчётность в Google Data Studio. География не влияет на качество работы.</p>
+                    </div>
+                </div>
+                
+                <!-- Вопрос 8 -->
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Что делать, если результаты не устраивают?</span>
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="2" fill="none"/>
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Мы всегда работаем на результат. Если KPI не достигнуты, мы проводим детальный анализ, вносим корректировки в стратегию и продолжаем работу до достижения целей. В договоре прописываем условия, при которых возможно расторжение сотрудничества.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Контакты и форма -->
+    <section class="contact-section" id="form">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Свяжитесь с нами</h2>
+                <p class="section-subtitle">Выберите удобный способ связи или оставьте заявку</p>
+            </div>
+            
+            <div class="contact-grid">
+                <!-- Контактная информация -->
+                <div class="contact-info">
+                    <div class="contact-method">
+                        <div class="contact-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="#B6FF2E">
+                                <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                            </svg>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Электронная почта</h4>
+                            <p>Для деловых предложений и вопросов</p>
+                            <a href="mailto:mgcgroup@business.com" class="contact-link">mgcgroup@business.com</a>
+                            <p><small>Ответ в течение 24 часов</small></p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-method">
+                        <div class="contact-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="#B6FF2E">
+                                <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                            </svg>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Телефон</h4>
+                            <p>Для быстрой связи и консультаций</p>
+                            <a href="tel:+79775699900" class="contact-link">+7 (977) 569 99 00</a>
+                            <p><small>Пн-Пт, 10:00-19:00 по МСК</small></p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-method">
+                        <div class="contact-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="#B6FF2E">
+                                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                            </svg>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Адрес офиса</h4>
+                            <p>Для личных встреч и переговоров</p>
+                            <p>Москва, Пресненская набережная, д 12, корпус 1, строение 1</p>
+                            <p><small>Вход по предварительной договорённости</small></p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-method">
+                        <div class="contact-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="#B6FF2E">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.41 1-.67 1-.58 0-1.03-.43-1.6-.85-.88-.64-1.38-1.04-2.24-1.67-.99-.71-.35-1.1.22-1.74.15-.16 2.71-2.48 2.76-2.69.01-.03.01-.14-.06-.2-.07-.06-.17-.04-.24-.03-.1.02-1.79 1.12-5.06 3.31-.48.33-.92.49-1.31.48-.43-.01-1.27-.24-1.89-.44-.76-.25-1.36-.38-1.31-.8.03-.24.28-.48.77-.73 2.99-1.39 4.99-2.31 6-2.78 2.78-1.03 3.36-1.21 3.74-1.21.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.28 0 0z"/>
+                            </svg>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Telegram</h4>
+                            <p>Для оперативного общения</p>
+                            <a href="https://t.me/mgcgroup" class="contact-link" target="_blank">@mgcgroup</a>
+                            <p><small>Ответ в течение 2 часов в рабочее время</small></p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Форма обратной связи -->
+                <div class="contact-form-container" id="cfc">
+                    <h3>Оставьте заявку</h3>
+                    <p>Мы свяжемся с вами в течение 2 часов</p>
+                    
+                    <form class="contact-form" id="contactForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <input type="text" id="name" name="name" placeholder="Ваше имя" required>
+                                <div class="error-message" id="nameError">Пожалуйста, введите ваше имя</div>
+                            </div>
+                            <div class="form-group">
+                                <input type="tel" id="phone" name="phone" placeholder="Телефон" required>
+                                <div class="error-message" id="phoneError">Введите корректный номер телефона</div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="email" id="email" name="email" placeholder="Email" required>
+                            <div class="error-message" id="emailError">Введите корректный email адрес</div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <select id="service" name="service" required>
+                                <option value="" disabled selected>Выберите услугу</option>
+                                <option value="smm">SMM ведение</option>
+                                <option value="target">Таргетированная реклама</option>
+                                <option value="strategy">Контент-стратегия</option>
+                                <option value="audit">Аудит соцсетей</option>
+                                <option value="complex">Комплексное продвижение</option>
+                            </select>
+                            <div class="error-message" id="serviceError">Выберите услугу</div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <textarea id="message" name="message" placeholder="Расскажите о вашем проекте и задачах" required></textarea>
+                            <div class="error-message" id="messageError">Пожалуйста, опишите ваш проект</div>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary btn-large" id="submitBtn">Отправить заявку</button>
+                        
+                        <p class="form-note">Нажимая кнопку, вы соглашаетесь с <a href="#">политикой конфиденциальности</a></p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Карта -->
+    <section class="map-section">
+        <div class="container">
+            <div class="map-container">
+                <div id="yandex-map"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA секция -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-card">
+                <div class="cta-content">
+                    <h2 class="cta-title">Остались вопросы?</h2>
+                    <p class="cta-text">Получите бесплатный аудит ваших соцсетей с конкретными рекомендациями по улучшению</p>
+                    
+                    <div class="cta-buttons">
+                        <a href="tel:+79775699900" class="btn btn-primary btn-large">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor" style="margin-right: 10px;">
+                                <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
+                            </svg>
+                            Позвонить сейчас
+                        </a>
+                        <a href="#contactForm" class="btn btn-secondary btn-large">Заполнить форму</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Футер (такой же как на главной) -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="index.html" class="footer-logo">
+                        <div class="logo-icon">
+                            <svg width="40" height="40" viewBox="0 0 40 40">
+                                <circle cx="20" cy="20" r="18" stroke="#B6FF2E" stroke-width="3" fill="none"/>
+                                <polygon points="20,8 26,18 32,18 26,24 28,32 20,26 12,32 14,24 8,18 14,18" fill="#B6FF2E"/>
+                            </svg>
+                        </div>
+                        <div class="logo-text">
+                            <span class="logo-title">MGC Group</span>
+                            <span class="logo-subtitle">Most Grateful Company</span>
+                        </div>
+                    </a>
+                    <p class="footer-description">Команда маркетинговых экспертов, которая помогает бизнесу получать заявки и продажи из соцсетей.</p>
+                    
+                    <div class="social-links">
+                        <a href="#" aria-label="Telegram">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.41 1-.67 1-.58 0-1.03-.43-1.6-.85-.88-.64-1.38-1.04-2.24-1.67-.99-.71-.35-1.1.22-1.74.15-.16 2.71-2.48 2.76-2.69.01-.03.01-.14-.06-.2-.07-.06-.17-.04-.24-.03-.1.02-1.79 1.12-5.06 3.31-.48.33-.92.49-1.31.48-.43-.01-1.27-.24-1.89-.44-.76-.25-1.36-.38-1.31-.8.03-.24.28-.48.77-.73 2.99-1.39 4.99-2.31 6-2.78 2.78-1.03 3.36-1.21 3.74-1.21.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.28 0 0z"/>
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="VK">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.9 13.4c-.2.5-.6.9-1.1 1.1-.5.2-1 .2-1.5 0-.3-.1-.6-.3-.9-.5-.1-.1-.3-.2-.4-.3 0-.1-.1-.2-.1-.3 0-.1 0-.2-.1-.3l-.4.3c-.3.2-.6.4-.9.5-.5.2-1 .2-1.5 0-.5-.2-.9-.6-1.1-1.1-.2-.5-.2-1 0-1.5.1-.3.3-.6.5-.9.1-.1.2-.3.3-.4 0-.1.1-.2.1-.3 0-.1 0-.2-.1-.3l-.3-.4c-.2-.3-.4-.6-.5-.9-.2-.5-.2-1 0-1.5.2-.5.6-.9 1.1-1.1.5-.2 1-.2 1.5 0 .3.1.6.3.9.5.1.1.3.2.4.3.1 0 .2.1.3.1.1 0 .2 0 .3-.1l.4-.3c.3-.2.6-.4.9-.5.5-.2 1-.2 1.5 0 .5.2.9.6 1.1 1.1.2.5.2 1 0 1.5-.1.3-.3.6-.5.9-.1.1-.2.3-.3.4 0 .1-.1.2-.1.3 0 .1 0 .2.1.3l.3.4c.2.3.4.6.5.9.2.5.2 1 0 1.5z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-title">Навигация</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="pricing.html">Тарифы</a></li>
+                        <li><a href="team.html">Эксперты и отзывы</a></li>
+                        <li><a href="contact.html">Помощь</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-title">Услуги</h3>
+                    <ul class="footer-links">
+                        <li><a href="#cfc">SMM ведение</a></li>
+                        <li><a href="#cfc">Таргетированная реклама</a></li>
+                        <li><a href="#cfc">Контент-стратегия</a></li>
+                        <li><a href="#cfc">Аудит соцсетей</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-title">Контакты</h3>
+                    <ul class="footer-contacts">
+                        <li>
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="#B6FF2E">
+                                <path d="M14.5 1.5h-13c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h13c.55 0 1-.45 1-1v-10c0-.55-.45-1-1-1zm-13 1h13v.88l-6.5 4.33-6.5-4.33v-.88zm13 10h-13v-8.12l6.5 4.33 6.5-4.33v8.12z"/>
+                            </svg>
+                            <span>mgcgroup@business.com</span>
+                        </li>
+                        <li>
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="#B6FF2E">
+                                <path d="M11 1c-.55 0-1 .45-1 1v.5c0 .28.22.5.5.5s.5-.22.5-.5v-.5c0-.28.22-.5.5-.5s.5.22.5.5v.5c0 .28.22.5.5.5s.5-.22.5-.5v-.5c0-.55-.45-1-1-1h-1zm-1 2c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1c0-.55-.45-1-1-1h-1c-.55 0-1 .45-1 1v1zm-7.5 1c-.28 0-.5.22-.5.5v10c0 .28.22.5.5.5h10c.28 0 .5-.22.5-.5v-10c0-.28-.22-.5-.5-.5h-10zm.5 1h9v9h-9v-9zm4.5 6c-.28 0-.5.22-.5.5s.22.5.5.5h1c.28 0 .5-.22.5-.5s-.22-.5-.5-.5h-1zm-3-3c-.28 0-.5.22-.5.5s.22.5.5.5h7c.28 0 .5-.22.5-.5s-.22-.5-.5-.5h-7zm0 2c-.28 0-.5.22-.5.5s.22.5.5.5h5c.28 0 .5-.22.5-.5s-.22-.5-.5-.5h-5z"/>
+                            </svg>
+                            <span>+7 (977) 569 99 00</span>
+                        </li>
+                        <li>
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="#B6FF2E">
+                                <path d="M8 0C3.58 0 0 3.58 0 8s3.58 8 8 8 8-3.58 8-8S12.42 0 8 0zm0 14.5c-3.59 0-6.5-2.91-6.5-6.5S4.41 1.5 8 1.5s6.5 2.91 6.5 6.5-2.91 6.5-6.5 6.5zM8 4c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 6.5c-1.38 0-2.5-1.12-2.5-2.5S6.62 5.5 8 5.5s2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                            </svg>
+                            <span>Москва, Пресненская набережная, д 12, корпус 1, строение 1</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-copyright">© 2023 MGC Group. Most Grateful Company. Все права защищены.</div>
+                <div class="footer-legal">
+                    <a href="#" onclick="openModal('privacyModal'); return false;">Политика конфиденциальности</a>
+                    <a href="#" onclick="openModal('offerModal'); return false;">Договор-оферта</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Модальное окно Политика конфиденциальности -->
+<div class="modal-overlay" id="privacyModal">
+    <div class="modal-container">
+        <div class="modal-header">
+            <h2>Политика конфиденциальности</h2>
+            <button class="modal-close" onclick="closeModal('privacyModal')">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                </svg>
+            </button>
+        </div>
+        
+        <div class="modal-content">
+            <div class="document-section">
+                <h3>1. Общие положения</h3>
+                <p>Настоящая Политика конфиденциальности персональных данных (далее — Политика) действует в отношении всей информации, которую MGC Group (далее — Компания) может получить о Пользователе во время использования сайта, услуг, программ и продуктов Компании.</p>
+            </div>
+            
+            <div class="document-section">
+                <h3>2. Собираемая информация</h3>
+                <p>При работе с нами мы можем собирать следующую информацию:</p>
+                <ul>
+                    <li>Фамилия, имя, отчество</li>
+                    <li>Контактный телефон и адрес электронной почты</li>
+                    <li>Название компании и должность</li>
+                    <li>Данные о проекте и бизнес-задачах</li>
+                    <li>История обращений и переписки</li>
+                    <li>Данные об использовании наших услуг</li>
+                </ul>
+            </div>
+            
+            <div class="document-section">
+                <h3>3. Цели сбора информации</h3>
+                <ul>
+                    <li>Предоставление консультаций и услуг</li>
+                    <li>Обработка заявок и обращений</li>
+                    <li>Улучшение качества предоставляемых услуг</li>
+                    <li>Информирование о новых услугах и акциях</li>
+                    <li>Выполнение договорных обязательств</li>
+                    <li>Соблюдение требований законодательства</li>
+                </ul>
+            </div>
+            
+            <div class="document-section">
+                <h3>4. Защита персональных данных</h3>
+                <p>Мы принимаем необходимые организационные и технические меры для защиты персональных данных от неправомерного или случайного доступа, уничтожения, изменения, блокирования, копирования, распространения, а также от иных неправомерных действий.</p>
+                <p>Доступ к персональным данным имеют только уполномоченные сотрудники Компании, которые приняли обязательство о сохранении конфиденциальности.</p>
+            </div>
+            
+            <div class="document-section">
+                <h3>5. Передача информации третьим лицам</h3>
+                <p>Мы не передаем персональные данные третьим лицам, за исключением следующих случаев:</p>
+                <ul>
+                    <li>С согласия Пользователя</li>
+                    <li>По требованию уполномоченных государственных органов</li>
+                    <li>Для исполнения договорных обязательств</li>
+                    <li>При использовании сервисов и серверов, расположенных за пределами РФ</li>
+                </ul>
+            </div>
+            
+            <div class="document-section">
+                <h3>6. Cookies и аналитика</h3>
+                <p>Наш сайт использует файлы cookie и аналогичные технологии для анализа посещаемости, запоминания предпочтений и обеспечения безопасности.</p>
+                <p>Вы можете отключить cookies в настройках браузера, однако это может повлиять на работу сайта.</p>
+            </div>
+            
+            <div class="document-section">
+                <h3>7. Права Пользователя</h3>
+                <ul>
+                    <li>Получать информацию об обработке своих персональных данных</li>
+                    <li>Требовать уточнения, блокирования или уничтожения данных</li>
+                    <li>Отозвать согласие на обработку персональных данных</li>
+                    <li>Обжаловать действия или бездействие Компании</li>
+                </ul>
+            </div>
+            
+            <div class="document-section">
+                <h3>8. Хранение данных</h3>
+                <p>Персональные данные хранятся в течение срока, необходимого для достижения целей обработки, или до отзыва согласия Пользователем.</p>
+                <p>По истечении срока хранения данные уничтожаются или обезличиваются.</p>
+            </div>
+            
+            <div class="document-section">
+                <h3>9. Контакты</h3>
+                <p>По вопросам, связанным с обработкой персональных данных, обращайтесь:</p>
+                <p><strong>Email:</strong> privacy@mgcgroup.ru</p>
+                <p><strong>Телефон:</strong> +7 (977) 569 99 00</p>
+                <p><strong>Адрес:</strong> Москва, Пресненская набережная, д 12, корпус 1</p>
+            </div>
+            
+            <div class="document-section">
+                <h3>10. Изменения в Политике</h3>
+                <p>Мы оставляем за собой право вносить изменения в настоящую Политику. Новая редакция вступает в силу с момента ее размещения на сайте.</p>
+                <p><em>Последнее обновление: 15 января 2024 года</em></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Модальное окно Договор-оферта -->
+<div class="modal-overlay" id="offerModal">
+    <div class="modal-container">
+        <div class="modal-header">
+            <h2>Договор-оферта на оказание услуг</h2>
+            <button class="modal-close" onclick="closeModal('offerModal')">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                </svg>
+            </button>
+        </div>
+        
+        <div class="modal-content">
+            <div class="document-section">
+                <h3>1. ТЕРМИНЫ И ОПРЕДЕЛЕНИЯ</h3>
+                <p><strong>1.1. Исполнитель</strong> — MGC Group (Most Grateful Company), ИНН 7701234567, оказывающий услуги по настоящему Договору.</p>
+                <p><strong>1.2. Заказчик</strong> — физическое или юридическое лицо, принявшее условия настоящей оферты.</p>
+                <p><strong>1.3. Услуги</strong> — услуги по ведению и продвижению аккаунтов в социальных сетях.</p>
+            </div>
+            
+            <div class="document-section">
+                <h3>2. ПРЕДМЕТ ДОГОВОРА</h3>
+                <p><strong>2.1.</strong> Исполнитель обязуется оказать Заказчику услуги по продвижению в социальных сетях, а Заказчик обязуется оплатить эти услуги.</p>
+                <p><strong>2.2.</strong> Перечень услуг, их объем и стоимость определяются в Приложении №1, которое является неотъемлемой частью Договора.</p>
+                <p><strong>2.3.</strong> Акцептом настоящей оферты считается оплата услуг или подписание Заказчиком Спецификации услуг.</p>
+            </div>
+            
+            <div class="document-section">
+                <h3>3. СТОИМОСТЬ УСЛУГ И ПОРЯДОК РАСЧЕТОВ</h3>
+                <p><strong>3.1.</strong> Стоимость услуг указана в Приложении №1. Все цены указаны в рублях РФ.</p>
+                <p><strong>3.2.</strong> Оплата производится ежемесячно, не позднее 5 числа месяца, следующего за расчетным.</p>
+                <p><strong>3.3.</strong> Исполнитель выставляет Заказчику счет на оплату. Счет действителен в течение 5 банковских дней.</p>
+            </div>
+            
+            <div class="document-section">
+                <h3>4. ПРАВА И ОБЯЗАННОСТИ СТОРОН</h3>
+                <p><strong>Исполнитель обязуется:</strong></p>
+                <ul>
+                    <li>Оказывать услуги в соответствии с условиями Договора</li>
+                    <li>Предоставлять еженедельные отчеты о проделанной работе</li>
+                    <li>Соблюдать конфиденциальность информации Заказчика</li>
+                    <li>Вносить корректировки в стратегию по согласованию с Заказчиком</li>
+                </ul>
+                
+                <p><strong>Заказчик обязуется:</strong></p>
+                <ul>
+                    <li>Своевременно оплачивать услуги</li>
+                    <li>Предоставлять необходимую информацию и материалы</li>
+                    <li>Согласовывать контент в течение 2 рабочих дней</li>
+                    <li>Предоставить доступ к аккаунтам социальных сетей</li>
+                </ul>
+            </div>
+            
+            <div class="document-section">
+                <h3>5. СРОКИ ИСПОЛНЕНИЯ ОБЯЗАТЕЛЬСТВ</h3>
+                <p><strong>5.1.</strong> Договор вступает в силу с момента его акцепта Заказчиком и действует до полного исполнения обязательств.</p>
+                <p><strong>5.2.</strong> Минимальный срок оказания услуг — <strong>3 месяца</strong>.</p>
+                <p><strong>5.3.</strong> Стороны вправе расторгнуть Договор, уведомив другую сторону за 14 календарных дней.</p>
+            </div>
+            
+            <div class="document-section">
+                <h3>6. ГАРАНТИИ И ОТВЕТСТВЕННОСТЬ</h3>
+                <p><strong>6.1.</strong> Исполнитель не гарантирует достижение конкретных коммерческих результатов.</p>
+                <p><strong>6.2.</strong> Стороны освобождаются от ответственности при наступлении обстоятельств непреодолимой силы.</p>
+                <p><strong>6.3.</strong> Ответственность Исполнителя ограничена стоимостью услуг за 1 месяц.</p>
+            </div>
+            
+            <div class="document-section">
+                <h3>7. КОНФИДЕНЦИАЛЬНОСТЬ</h3>
+                <p><strong>7.1.</strong> Стороны обязуются сохранять конфиденциальность коммерческой информации.</p>
+                <p><strong>7.2.</strong> Обязательство о конфиденциальности действует в течение 3 лет после прекращения Договора.</p>
+            </div>
+            
+            <div class="document-section">
+                <h3>8. РАЗРЕШЕНИЕ СПОРОВ</h3>
+                <p><strong>8.1.</strong> Все споры решаются путем переговоров.</p>
+                <p><strong>8.2.</strong> При недостижении согласия спор передается в суд по месту нахождения Исполнителя.</p>
+            </div>
+            
+            <div class="document-section">
+                <h3>9. ПРОЧИЕ УСЛОВИЯ</h3>
+                <p><strong>9.1.</strong> Договор составлен в двух экземплярах, имеющих равную юридическую силу.</p>
+                <p><strong>9.2.</strong> Все изменения оформляются дополнительными соглашениями.</p>
+                <p><strong>9.3.</strong> Уведомления направляются на email-адреса, указанные при заключении Договора.</p>
+            </div>
+            
+            <div class="document-section signature-block">
+                <h3>РЕКВИЗИТЫ ИСПОЛНИТЕЛЯ:</h3>
+                <p><strong>MGC Group (Most Grateful Company)</strong></p>
+                <p>ИНН: 7701234567 • КПП: 770101001</p>
+                <p>ОГРН: 1234567890123</p>
+                <p>Адрес: 123112, г. Москва, Пресненская наб., д. 12, корп. 1</p>
+                <p>Р/с: 40702810901234567890 в ПАО "Сбербанк"</p>
+                <p>БИК: 044525225</p>
+                <p>Телефон: +7 (977) 569 99 00</p>
+                <p>Email: legal@mgcgroup.ru</p>
+                <p class="signature-date"><strong>Дата составления:</strong> 15 января 2024 года</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- Подключение Яндекс.Карт API -->
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=ваш_api_ключ&lang=ru_RU" type="text/javascript"></script>
+    
+    <script>
+        // FAQ аккордеон
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const item = question.parentElement;
+                const isActive = item.classList.contains('active');
+                
+                // Закрываем все другие вопросы
+                document.querySelectorAll('.faq-item').forEach(otherItem => {
+                    otherItem.classList.remove('active');
+                });
+                
+                // Открываем текущий, если был закрыт
+                if (!isActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
+
+        // Валидация формы
+        function validateForm() {
+            let isValid = true;
+            
+            // Валидация имени
+            const name = document.getElementById('name');
+            const nameError = document.getElementById('nameError');
+            if (name.value.trim() === '') {
+                name.classList.add('error');
+                name.classList.remove('success');
+                nameError.classList.add('show');
+                isValid = false;
+            } else {
+                name.classList.remove('error');
+                name.classList.add('success');
+                nameError.classList.remove('show');
+            }
+            
+            // Валидация телефона
+            const phone = document.getElementById('phone');
+            const phoneError = document.getElementById('phoneError');
+            const phoneRegex = /^[\+]?[7-8]?[0-9\s\-\(\)]{10,}$/;
+            if (!phoneRegex.test(phone.value.trim())) {
+                phone.classList.add('error');
+                phone.classList.remove('success');
+                phoneError.classList.add('show');
+                isValid = false;
+            } else {
+                phone.classList.remove('error');
+                phone.classList.add('success');
+                phoneError.classList.remove('show');
+            }
+            
+            // Валидация email
+            const email = document.getElementById('email');
+            const emailError = document.getElementById('emailError');
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email.value.trim())) {
+                email.classList.add('error');
+                email.classList.remove('success');
+                emailError.classList.add('show');
+                isValid = false;
+            } else {
+                email.classList.remove('error');
+                email.classList.add('success');
+                emailError.classList.remove('show');
+            }
+            
+            // Валидация услуги
+            const service = document.getElementById('service');
+            const serviceError = document.getElementById('serviceError');
+            if (service.value === '') {
+                service.classList.add('error');
+                service.classList.remove('success');
+                serviceError.classList.add('show');
+                isValid = false;
+            } else {
+                service.classList.remove('error');
+                service.classList.add('success');
+                serviceError.classList.remove('show');
+            }
+            
+            // Валидация сообщения
+            const message = document.getElementById('message');
+            const messageError = document.getElementById('messageError');
+            if (message.value.trim() === '') {
+                message.classList.add('error');
+                message.classList.remove('success');
+                messageError.classList.add('show');
+                isValid = false;
+            } else {
+                message.classList.remove('error');
+                message.classList.add('success');
+                messageError.classList.remove('show');
+            }
+            
+            return isValid;
+        }
+        
+        // Обработка отправки формы
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (validateForm()) {
+                const submitBtn = document.getElementById('submitBtn');
+                const originalText = submitBtn.textContent;
+                
+                submitBtn.textContent = 'Отправка...';
+                submitBtn.disabled = true;
+                
+                // Имитация отправки на сервер
+                setTimeout(() => {
+                    submitBtn.textContent = 'Заявка отправлена!';
+                    submitBtn.style.backgroundColor = '#4CAF50';
+                    
+                    setTimeout(() => {
+                        submitBtn.textContent = originalText;
+                        submitBtn.disabled = false;
+                        submitBtn.style.backgroundColor = '';
+                        this.reset();
+                        
+                        // Сброс стилей полей
+                        document.querySelectorAll('.form-group input, .form-group select, .form-group textarea').forEach(field => {
+                            field.classList.remove('success', 'error');
+                        });
+                        document.querySelectorAll('.error-message').forEach(error => {
+                            error.classList.remove('show');
+                        });
+                        
+                        // Показываем сообщение об успехе
+                        alert('Спасибо! Ваша заявка отправлена. Мы свяжемся с вами в течение 2 часов.');
+                    }, 2000);
+                }, 1500);
+            }
+        });
+        
+        // Реальная валидация при вводе
+        document.querySelectorAll('#contactForm input, #contactForm textarea, #contactForm select').forEach(field => {
+            field.addEventListener('blur', function() {
+                validateForm();
+            });
+        });
+        
+        // Маска для телефона
+        document.getElementById('phone').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            
+            if (value.length > 0) {
+                if (value[0] === '8') {
+                    value = '7' + value.slice(1);
+                }
+                
+                if (value[0] !== '7') {
+                    value = '7' + value;
+                }
+                
+                let formattedValue = '+7 (';
+                
+                if (value.length > 1) {
+                    formattedValue += value.slice(1, 4);
+                }
+                if (value.length >= 4) {
+                    formattedValue += ') ' + value.slice(4, 7);
+                }
+                if (value.length >= 7) {
+                    formattedValue += '-' + value.slice(7, 9);
+                }
+                if (value.length >= 9) {
+                    formattedValue += '-' + value.slice(9, 11);
+                }
+                
+                e.target.value = formattedValue;
+            }
+        });
+
+        // Инициализация Яндекс.Карты
+        ymaps.ready(initMap);
+        
+        function initMap() {
+            const map = new ymaps.Map('yandex-map', {
+                center: [55.7495, 37.5436], // Координаты офиса
+                zoom: 16,
+                controls: ['zoomControl', 'fullscreenControl']
+            });
+            
+            // Добавляем маркер
+            const placemark = new ymaps.Placemark([55.7495, 37.5436], {
+                balloonContent: 'MGC Group<br>Пресненская набережная, д 12, корпус 1, строение 1'
+            }, {
+                preset: 'islands#greenDotIconWithCaption'
+            });
+            
+            map.geoObjects.add(placemark);
+            
+            // Открываем баллун при загрузке
+            placemark.balloon.open();
+            
+            // Добавляем возможность изменения масштаба колесиком мыши
+            map.behaviors.enable('scrollZoom');
+        }
+
+
+        // Функции для работы с модальными окнами
+function openModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+        modal.style.display = 'block';
+        document.body.style.overflow = 'hidden'; // Блокируем скролл страницы
+        
+        // Добавляем обработчик для закрытия по ESC
+        document.addEventListener('keydown', handleEscKey);
+    }
+}
+
+function closeModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = ''; // Разблокируем скролл страницы
+        
+        // Удаляем обработчик ESC
+        document.removeEventListener('keydown', handleEscKey);
+    }
+}
+
+// Закрытие по ESC
+function handleEscKey(event) {
+    if (event.key === 'Escape') {
+        const modals = document.querySelectorAll('.modal-overlay');
+        modals.forEach(modal => {
+            if (modal.style.display === 'block') {
+                closeModal(modal.id);
+            }
+        });
+    }
+}
+
+// Закрытие при клике вне модального окна
+document.querySelectorAll('.modal-overlay').forEach(modal => {
+    modal.addEventListener('click', function(event) {
+        if (event.target === this) {
+            closeModal(this.id);
+        }
+    });
+});
+
+// Инициализация кликов по ссылкам в футере
+document.addEventListener('DOMContentLoaded', function() {
+    // Обработка кликов по ссылкам в футере
+    const privacyLinks = document.querySelectorAll('a[href*="privacy"], a[href*="конфиденциальности"]');
+    const offerLinks = document.querySelectorAll('a[href*="offer"], a[href*="оферта"]');
+    
+    privacyLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            openModal('privacyModal');
+        });
+    });
+    
+    offerLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            openModal('offerModal');
+        });
+    });
+    
+    // Более специфичные обработчики для футера
+    document.querySelectorAll('.footer-legal a').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (this.textContent.includes('Политика') || this.textContent.includes('конфиденциальности')) {
+                openModal('privacyModal');
+            } else if (this.textContent.includes('Договор') || this.textContent.includes('оферта')) {
+                openModal('offerModal');
+            }
+        });
+    });
+});
+    </script>
+</body>
+</html>
